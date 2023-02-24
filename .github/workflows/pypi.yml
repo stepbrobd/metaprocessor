@@ -1,0 +1,6 @@
+- name: Publish a Python distribution to PyPI
+  uses: pypa/gh-action-pypi-publish@v1.6.4
+  with:
+    password: ${{ secrets.PYPI_API_TOKEN }}
+    verbose: true
+    print_hash: true
