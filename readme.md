@@ -1,5 +1,7 @@
 # MetaProcessor
 
+![GitHub Action Status](https://github.com/StepBroBD/MetaProcessor/actions/workflows/Build.yml/badge.svg)
+
 ![GitHub Action Status](https://github.com/StepBroBD/MetaProcessor/actions/workflows/PyPI.yml/badge.svg)
 
 MetaProcessor, all-in-one data pipeline for MbientLab MetaWear series sensors!
