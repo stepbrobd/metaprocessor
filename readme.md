@@ -1,5 +1,10 @@
 # MetaProcessor
 
+## Setup
+
+Note: It's not required but strongly recommended to use `virtualenv`.
+
+
 ## License
 
 Licensed under the [MIT License](/license.md).
