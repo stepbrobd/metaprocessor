@@ -3,6 +3,7 @@ name: Publish Distribution to PyPI
 on:
   release:
     types: [published]
+  workflow_dispatch:
 
 jobs:
   PyPI:
