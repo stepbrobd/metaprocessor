@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "metaprocessor"
+version = "0.0.1"
+description = "MetaProcessor, all-in-one data pipeline for MbientLab MetaWear series sensors!"
+readme = "readme.md"
+license = { file = "license.md" }
+authors = [{ name = "StepBroBD", email = "Hi@StepBroBD.com" }]
+classifiers = [
+    "Environment :: Console",
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3 :: Only",
+]
+requires-python = ">=3"
+dependencies = ["toml", "coloredlogs", "numpy", "pandas", "pyarrow", "boto3"]
+
+[project.urls]
+Repository = "https://github.com/StepBroBD/MetaProcessor"
+
+[project.scripts]
+metaprocessor = "metaprocessor.main:main"
+mp = "metaprocessor.main:main"
