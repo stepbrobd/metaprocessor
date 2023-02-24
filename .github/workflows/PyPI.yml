@@ -9,10 +9,11 @@ jobs:
   PyPI:
     runs-on: ubuntu-latest
     steps:
-      - name: Build
+      - name: Checkout
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+      - name: Build
       - run: python3 -m pip install --upgrade build && python3 -m build
       - name: Publish
         uses: pypa/gh-action-pypi-publish@v1.6.4
