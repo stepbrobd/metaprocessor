@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - run: sudo apt update \
-              sudo apt-get install -y build-essential tk-dev libncurses5-dev libncursesw5-dev libreadline6-dev libdb5.3-dev libgdbm-dev libsqlite3-dev libssl-dev libbz2-dev libexpat1-dev liblzma-dev zlib1g-dev libffi-dev \
-              sudo apt-get install -y bluetooth bluez libbluetooth-dev libudev-dev libboost-all-dev build-essential
+      - run: sudo apt update
+      - run: sudo apt-get install -y build-essential tk-dev libncurses5-dev libncursesw5-dev libreadline6-dev libdb5.3-dev libgdbm-dev libsqlite3-dev libssl-dev libbz2-dev libexpat1-dev liblzma-dev zlib1g-dev libffi-dev
+      - run: sudo apt-get install -y bluetooth bluez libbluetooth-dev libudev-dev libboost-all-dev build-essential
       - run: python3 -m venv .venv && source .venv/bin/activate && CFLAGS="-O3 -fopenmp" pip install .
