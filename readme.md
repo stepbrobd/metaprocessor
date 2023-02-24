@@ -1,5 +1,9 @@
 # MetaProcessor
 
+![GitHub Action Status](https://github.com/StepBroBD/MetaProcessor/actions/workflows/PyPI.yml/badge.svg)
+
+MetaProcessor, all-in-one data pipeline for MbientLab MetaWear series sensors!
+
 ## Setup
 
 Note: It's not required but strongly recommended to use `virtualenv`.
