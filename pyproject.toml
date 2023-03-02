@@ -17,7 +17,7 @@ classifiers = [
 ]
 requires-python = ">=3"
 dependencies = [
-    "metawear;platform_system=='Linux'",
+    "metawear;platform_system!='Darwin'",
     "toml",
     "coloredlogs",
     "numpy",
