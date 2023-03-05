@@ -16,9 +16,9 @@ const config: DocsThemeConfig = {
   ),
 
   project: {
-    link: "https://github.com/stepbrobd/metaprocessor",
+    link: "https://github.com/metaprocessor/metaprocessor",
   },
-  docsRepositoryBase: "https://github.com/stepbrobd/metaprocessor/tree/master/docs/pages",
+  docsRepositoryBase: "https://github.com/metaprocessor/metaprocessor/tree/master/docs/pages",
 
   useNextSeoProps() {
     return {
