@@ -62,6 +62,7 @@ const Head = ({
         sizes="16x16"
         href="/favicon-16x16.png"
       />
+      <meta property="og:locale" content="en_US" />
       <meta property="og:url" content={url || "https://metaprocessor.org"} />
       <meta property="og:title" content={title || "MetaProcessor"} />
       <meta
@@ -71,6 +72,7 @@ const Head = ({
           "MetaProcessor, all-in-one data pipeline for MbientLab MetaWear series sensors!"
         }
       />
+      <meta property="og:image" content="https://metaprocessor.org/og.webp" />
     </>
   );
 };
