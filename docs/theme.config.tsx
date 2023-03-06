@@ -22,9 +22,12 @@ const config: DocsThemeConfig = {
     "https://github.com/metaprocessor/metaprocessor/tree/master/docs",
 
   useNextSeoProps() {
-    return {
-      titleTemplate: "%s – MetaProcessor",
-    };
+    const { asPath } = useRouter();
+    if (asPath !== "/") {
+      return {
+        titleTemplate: "%s – MetaProcessor",
+      };
+    }
   },
 
   head: () => {
