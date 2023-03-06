@@ -15,4 +15,4 @@ Note: It's not required but strongly recommended to use `virtualenv`.
 
 Licensed under the [MIT License](/license.md).
 
-Copyright (c) 2023 MetaProcessor contributors.
+&copy; 2023 [MetaProcessor contributors](https://github.com/metaprocessor/metaprocessor/graphs/contributors).
