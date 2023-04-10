@@ -17,9 +17,11 @@ classifiers = [
 ]
 requires-python = ">=3"
 dependencies = [
-    "metawear;platform_system!='Darwin'",
+    "click",
+    "click-option-group",
+    "metawear;platform_system!='Darwin' and platform_system!='Windows'",
+    "rich",
     "toml",
-    "coloredlogs",
     "numpy",
     "pandas",
     "pyarrow",
@@ -30,5 +32,5 @@ dependencies = [
 Repository = "https://github.com/StepBroBD/MetaProcessor"
 
 [project.scripts]
-metaprocessor = "metaprocessor.main:main"
-mp = "metaprocessor.main:main"
+metaprocessor = "metaprocessor.cli:cli"
+mp = "metaprocessor.cli:cli"
