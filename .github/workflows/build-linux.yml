@@ -16,4 +16,6 @@ jobs:
         with:
           fetch-depth: 0
       - run: sudo apt-get update && sudo apt-get install -y build-essential tk-dev libncurses5-dev libncursesw5-dev libreadline6-dev libdb5.3-dev libgdbm-dev libsqlite3-dev libssl-dev libbz2-dev libexpat1-dev liblzma-dev zlib1g-dev libffi-dev bluetooth bluez libbluetooth-dev libudev-dev libboost-all-dev
-      - run: python3 -m venv .venv && source .venv/bin/activate && python3 -m pip install . && python3 -m metaprocessor --help
+      - run: python3 -m venv .venv && source .venv/bin/activate && python3 -m pip install .
+      - run: metaprocessor --version
+      - run: metaprocessor --help
