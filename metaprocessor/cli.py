@@ -2,6 +2,7 @@ import click
 
 
 from metaprocessor.commands.config import config
+from metaprocessor.commands.objects import objects
 
 
 @click.group()
@@ -14,3 +15,4 @@ def cli() -> None:
 
 
 cli.add_command(config)
+cli.add_command(objects)
