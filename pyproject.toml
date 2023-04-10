@@ -18,6 +18,7 @@ classifiers = [
 requires-python = ">=3"
 dependencies = [
     "click",
+    "click-option-group",
     "metawear;platform_system!='Darwin' and platform_system!='Windows'",
     "rich",
     "toml",
