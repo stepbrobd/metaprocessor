@@ -11,15 +11,217 @@ This section covers configurations options.
 
 On initial installation, run:
 
-```bash
+```shell
 mp config init
 ```
 
-It'll create a new file located at `~/.config/metaprocessor/config.toml` and open it in your default editor (vim if `$EDITOR` is not set).
+This will create a new file located at `$XDG_CONFIG_HOME/metaprocessor/config.toml` (`~/.config/metaprocessor/config.toml` if `$XDG_CONFIG_HOME` is not set).
 
 Interactive setup is also avaiable, run:
 
-```bash
+```shell
 mp config init --interactive
 ```
 
+If configuration is already present, an error will be thrown. To overwrite the existing configuration, run:
+
+```shell
+mp config init --force
+```
+
+## Edit
+
+To edit the configuration file, run:
+
+```shell
+mp config edit
+```
+
+This will open the configuration file in the default editor (as specified by the `EDITOR` environment variable), if the editor is not set, it will use `vim`.
+
+If the configuration file is not present, an error will be thrown. To create a new configuration file, run:
+
+```shell
+mp config init
+```
+
+## Check
+
+Use the following command to check the configuration file:
+
+```shell
+mp config check
+```
+
+There are two types of checks:
+
+1. Unfilled Options check: This is to check if there are any unfilled options in the configuration file. If there are any unfilled options, an error will be thrown.
+2. Invalid Type check: This is to check if the type of the options are correct. If there are any invalid types, an error will be thrown.
+
+If the configuration file is not present, an error will be thrown. To create a new configuration file, run:
+
+```shell
+mp config init
+```
+
+## Show
+
+This command is to show the configuration file:
+
+```shell
+mp config show
+```
+
+If no flag is specified, the configuration file will be printed to the console in a human-readable format.
+
+If the `--json` flag is specified, the configuration file will be printed to the console in JSON format, it can be further processed by other programs like `jq`.
+
+If the configuration file is not present, an error will be thrown. To create a new configuration file, run:
+
+```shell
+mp config init
+```
+
+## Configuration Options
+
+The configuration file is a [TOML](https://toml.io/en/) file. The following options are available:
+
+### `general`
+
+It contains general configuration options.
+
+#### `general.utc-offset`
+
+This option is to convert MetaWear recorded IMU data timestamp from UTC to your local time zone, representing the offset in hours from UTC.
+
+##### Type
+
+`float`
+
+##### Default
+
+`0.0`
+
+##### Example
+
+If you are in UTC+8, the value should be `8.0`; if you are in UTC-5, the value should be `-5.0`.
+
+##### Note
+
+If you are located in UTC+0, the value should be `0.0`.
+
+#### `general.gd-location`
+
+This option is to specify the location of the global data storage, it is used to store the data from MetaWear devices, or to store downloaded data using the optional daemon.
+
+##### Type
+
+`string`
+
+##### Default
+
+`` (empty string)
+
+##### Example
+
+`/home/user/data` or `C:\Users\user\data`
+
+##### Note
+
+If you are using the optional daemon, you should specify a location that is accessible by the daemon with correct permissions.
+
+#### `general.gp-regex`
+
+This option is to specify the regex to match the global project ID. It must be a valid Python regex.
+
+##### Type
+
+`string`
+
+##### Default
+
+`*`
+
+##### Example
+
+`"^[0-9]{4}$"` to match 4-digit numbers.
+
+##### Note
+
+TOML cannot escape backslashes, so you should use double backslashes in the regex. For example: it is recommended to use `[0-9]` instead of `\d` in the regex
+
+Remember not to use the `^` and `$` symbols in the regex, as they are used to match the beginning and end of the string.
+
+The file will be named as `project ID` + `study group ID` + `study participant ID` + `recording device ID` + `file type`.
+
+#### `general.sg-regex`
+
+This option is to specify the regex to match the study group ID. It must be a valid Python regex.
+
+##### Type
+
+`string`
+
+##### Default
+
+`*`
+
+##### Example
+
+`"^[0-9]{4}$"` to match 4-digit numbers.
+
+##### Note
+
+TOML cannot escape backslashes, so you should use double backslashes in the regex. For example: it is recommended to use `[0-9]` instead of `\d` in the regex
+
+Remember not to use the `^` and `$` symbols in the regex, as they are used to match the beginning and end of the string.
+
+The file will be named as `project ID` + `study group ID` + `study participant ID` + `recording device ID` + `file type`.
+
+#### `general.sp-regex`
+
+This option is to specify the regex to match the study participant ID. It must be a valid Python regex.
+
+##### Type
+
+`string`
+
+##### Default
+
+`*`
+
+##### Example
+
+`"^[0-9]{4}$"` to match 4-digit numbers.
+
+##### Note
+
+TOML cannot escape backslashes, so you should use double backslashes in the regex. For example: it is recommended to use `[0-9]` instead of `\d` in the regex
+
+Remember not to use the `^` and `$` symbols in the regex, as they are used to match the beginning and end of the string.
+
+The file will be named as `project ID` + `study group ID` + `study participant ID` + `recording device ID` + `file type`.
+
+#### `general.sd-regex`
+
+This option is to specify the regex to match the recording device ID. It must be a valid Python regex.
+
+##### Type
+
+`string`
+
+##### Default
+
+`*`
+
+##### Example
+
+`"^[0-9]{4}$"` to match 4-digit numbers.
+
+##### Note
+
+TOML cannot escape backslashes, so you should use double backslashes in the regex. For example: it is recommended to use `[0-9]` instead of `\d` in the regex
+
+Remember not to use the `^` and `$` symbols in the regex, as they are used to match the beginning and end of the string.
+
+The file will be named as `project ID` + `study group ID` + `study participant ID` + `recording device ID` + `file type`.

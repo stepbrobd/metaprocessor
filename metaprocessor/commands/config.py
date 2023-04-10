@@ -29,7 +29,7 @@ def init(interactive: bool, force: bool) -> None:
     """
     default_config = {
         "general": {  # General settings
-            "utc-offset": 0,  # UTC offset in hours
+            "utc-offset": 0.0,  # UTC offset in hours
             "gd-location": "",  # Global Data Storage location
             "gp-regex": "*",  # Global Project ID regex
             "sg-regex": "*",  # Study Group ID regex
