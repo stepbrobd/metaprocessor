@@ -1,6 +1,6 @@
 import click
 import json as libjson
-import metaprocessor.config
+import metaprocessor.helpers.config
 from rich import print
 
 
@@ -45,14 +45,14 @@ def init(interactive: bool, force: bool) -> None:
         },
     }
 
-    if metaprocessor.config.exist() and not force:
+    if metaprocessor.helpers.config.exist() and not force:
         print(
             "[white][red]Configuration file already exists[/red], "
             f"please run [u]\[metaprocessor|mp] config edit[/u] instead, "
             "or use [u]--force[/u] to overwrite.[/white]"
         )
         raise SystemExit(1)
-    elif metaprocessor.config.exist() and force:
+    elif metaprocessor.helpers.config.exist() and force:
         print(
             "[white][yellow]Configuration file already exists[/yellow], "
             "overwriting...[/white]"
@@ -66,7 +66,7 @@ def init(interactive: bool, force: bool) -> None:
                     default=default_config[section][key],
                 )
 
-    metaprocessor.config.write(default_config)
+    metaprocessor.helpers.config.write(default_config)
 
 
 @config.command()
@@ -74,14 +74,14 @@ def edit() -> None:
     """
     Edit MetaProcessor configurations.
     """
-    if not metaprocessor.config.exist():
+    if not metaprocessor.helpers.config.exist():
         print(
             "[white][red]No configuration file found[/red], "
             f"please run [u]\[metaprocessor|mp] config init[/u] first.[/white]"
         )
         return
     else:
-        metaprocessor.config.edit()
+        metaprocessor.helpers.config.edit()
 
 
 @config.command()
@@ -89,14 +89,14 @@ def check() -> None:
     """
     Check MetaProcessor configurations.
     """
-    if not metaprocessor.config.exist():
+    if not metaprocessor.helpers.config.exist():
         print(
             "[white][red]No configuration file found[/red], "
             f"please run [u]\[metaprocessor|mp] config init[/u] first.[/white]"
         )
         return
     else:
-        config = metaprocessor.config.read()
+        config = metaprocessor.helpers.config.read()
         rule = {  # (required, type)
             "general": {
                 "utc-offset": (True, float),
@@ -115,7 +115,8 @@ def check() -> None:
             },
         }
 
-        print(f"[white]In [u]{metaprocessor.config.location()}[/u]:[/white]")
+        print(
+            f"[white]In [u]{metaprocessor.helpers.config.location()}[/u]:[/white]")
         error_count = 0
         for section in rule:
             for key in rule[section]:
@@ -149,14 +150,14 @@ def show(json: bool) -> None:
     """
     Show MetaProcessor configurations.
     """
-    if not metaprocessor.config.exist():
+    if not metaprocessor.helpers.config.exist():
         print(
             "[white][red]No configuration file found[/red], "
             f"please run [u]\[metaprocessor|mp] config init[/u] first.[/white]"
         )
         return
     else:
-        config = metaprocessor.config.read()
+        config = metaprocessor.helpers.config.read()
         if json:
             print(libjson.dumps(config, indent=2))
         else:
