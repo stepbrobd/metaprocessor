@@ -14,18 +14,26 @@ const Footer = () => {
           href={`https://github.com/metaprocessor/metaprocessor/commit/${commit}`}
           target="_blank"
         >
-          Commit digest: <u className="font-mono">{commit.substring(0, 17)}</u>.
+          <u className="font-mono">{commit.substring(0, 17)}</u>
         </a>
       </small>
       <small>
-        Copyright &copy; {new Date().getFullYear()}{" "}
+        <a href="https://iss.mech.utah.edu" target="_blank">
+          <u>ISS Lab</u>
+        </a>{" "}
+        and{" "}
+        <a href="https://batemanhornecenter.org" target="_blank">
+          <u>Bateman Horne Center</u>
+        </a>
+      </small>
+      <small>
+        &copy; {new Date().getFullYear()}{" "}
         <a
           href="https://github.com/metaprocessor/metaprocessor/graphs/contributors"
           target="_blank"
         >
           <u>MetaProcessor contributors</u>
         </a>
-        .
       </small>
     </div>
   );
