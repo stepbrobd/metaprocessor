@@ -9,7 +9,7 @@
     "singleQuote": false
   },
   "dependencies": {
-    "next": "^13.4.1",
+    "next": "^13.4.2",
     "nextra": "^2.5.2",
     "nextra-theme-docs": "^2.5.2",
     "react": "^18.2.0",
