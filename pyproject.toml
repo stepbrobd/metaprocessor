@@ -21,6 +21,7 @@ dependencies = [
     "click-option-group",
     "metawear;platform_system!='Darwin' and platform_system!='Windows'",
     "rich",
+    "tqdm",
     "toml",
     "numpy",
     "pandas",
