@@ -154,6 +154,10 @@ def mv() -> None:
     """
     Move (or rename) objects managed by MetaProcessor.
     """
+    print(
+        "[white][red]Not implemented yet[/red], "
+        "please see [u]https://github.com/metaprocessor/metaprocessor/blob/master/metaprocessor/commands/objects.py[/u] to check implantation status.[/white]"
+    )
 
 
 @objects.command()
@@ -161,6 +165,10 @@ def rm() -> None:
     """
     Delete objects from MetaProcessor.
     """
+    print(
+        "[white][red]Not implemented yet[/red], "
+        "please see [u]https://github.com/metaprocessor/metaprocessor/blob/master/metaprocessor/commands/objects.py[/u] to check implantation status.[/white]"
+    )
 
 
 @objects.command()
@@ -170,8 +178,50 @@ def upload() -> None:
     """
 
 
+@click.option(
+    "--key",
+    required=True,
+    help="Key of the object to download.",
+)
 @objects.command()
-def download() -> None:
+def download(key: str) -> None:
     """
     Download objects from cloud object store.
     """
+    config = metaprocessor.helpers.config.read()
+    location = config.get("general", {}).get("gd-location")
+    if location is None:
+        print(
+            "[white][red]No location set[/red], "
+            "please run [u]\[metaprocessor|mp] config edit[/u] to set location.[/white]"
+        )
+        return
+    else:
+        location = pathlib.Path(location) / key
+
+        for parent in reversed(location.parents):
+            if not parent.exists():
+                parent.mkdir()
+
+    response = metaprocessor.helpers.boto3.list_objects()
+
+    for object in response.get("Versions", []):
+        if object["Key"] == key:
+            etag = object["ETag"]
+            size = object["Size"]
+            break
+    else:
+        print(
+            f"[white][red]Object with key \"{key}\" does not exist[/red], "
+            f"please run [u]\[metaprocessor|mp] objects ls[/u] to list objects.[/white]"
+        )
+        return
+
+    if location.is_file() and metaprocessor.helpers.boto3.verify_object(str(location), etag):
+        print(
+            f"[white][green]Object with key \"{key}\" already exists[/green], "
+            f"the integrity of the file has been verified, skipping download.[/white]"
+        )
+        return
+    else:
+        metaprocessor.helpers.boto3.download_object(key, str(location), size)
