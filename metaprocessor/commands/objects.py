@@ -7,6 +7,8 @@ import json as libjson
 import datetime
 import time
 import pathlib
+import botocore
+from concurrent.futures.thread import ThreadPoolExecutor
 import metaprocessor.helpers.config
 import metaprocessor.helpers.boto3
 
@@ -178,50 +180,66 @@ def upload() -> None:
     """
 
 
+@objects.command()
 @click.option(
     "--key",
-    required=True,
+    required=False,
     help="Key of the object to download.",
 )
-@objects.command()
 def download(key: str) -> None:
     """
     Download objects from cloud object store.
     """
     config = metaprocessor.helpers.config.read()
-    location = config.get("general", {}).get("gd-location")
-    if location is None:
+    response = metaprocessor.helpers.boto3.list_objects()
+    etags = {
+        object["Key"]: object["ETag"]
+        for object in response.get("Versions", [])
+    }
+    sizes = {
+        object["Key"]: object["Size"]
+        for object in response.get("Versions", [])
+    }
+
+    base = config.get("general", {}).get("gd-location")
+    if not base:
         print(
             "[white][red]No location set[/red], "
             "please run [u]\[metaprocessor|mp] config edit[/u] to set location.[/white]"
         )
         return
-    else:
-        location = pathlib.Path(location) / key
+
+    def cached_download(key: str) -> None:
+        location = pathlib.Path(base) / key
 
         for parent in reversed(location.parents):
             if not parent.exists():
                 parent.mkdir()
 
-    response = metaprocessor.helpers.boto3.list_objects()
+        if location.is_file() and metaprocessor.helpers.boto3.verify_object(str(location), etags[key]):
+            print(
+                f"[white][green]Object with key \"{key}\" already exists[/green], "
+                f"the integrity of the file has been verified, skipping download.[/white]"
+            )
+        else:
+            metaprocessor.helpers.boto3.download_object(
+                key, str(location), sizes[key]
+            )
 
-    for object in response.get("Versions", []):
-        if object["Key"] == key:
-            etag = object["ETag"]
-            size = object["Size"]
-            break
-    else:
-        print(
-            f"[white][red]Object with key \"{key}\" does not exist[/red], "
-            f"please run [u]\[metaprocessor|mp] objects ls[/u] to list objects.[/white]"
-        )
-        return
+    if not key:
+        valid_keys = []
+        deleted_keys = []
 
-    if location.is_file() and metaprocessor.helpers.boto3.verify_object(str(location), etag):
-        print(
-            f"[white][green]Object with key \"{key}\" already exists[/green], "
-            f"the integrity of the file has been verified, skipping download.[/white]"
-        )
-        return
+        for object in response.get("Versions", []):
+            if object["Size"] > 0 and object["Key"][-1] != "/":
+                valid_keys.append(object["Key"])
+
+        for object in response.get("DeleteMarkers", []):
+            deleted_keys.append(object["Key"])
+
+        keys = [key for key in valid_keys if key not in deleted_keys]
+
+        with ThreadPoolExecutor() as executor:
+            executor.map(cached_download, keys)
     else:
-        metaprocessor.helpers.boto3.download_object(key, str(location), size)
+        cached_download(key)
