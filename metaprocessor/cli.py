@@ -1,7 +1,7 @@
 import click
 
-
 from metaprocessor.commands.config import config
+from metaprocessor.commands.metawear import metawear
 from metaprocessor.commands.objects import objects
 
 
@@ -15,4 +15,5 @@ def cli() -> None:
 
 
 cli.add_command(config)
+cli.add_command(metawear)
 cli.add_command(objects)
