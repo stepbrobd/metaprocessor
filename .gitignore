@@ -1,3 +1,7 @@
+# Nix
+**/.direnv/
+**/result/
+
 # Documentation website
 **/node_modules/
 **/.next/
