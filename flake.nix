@@ -16,15 +16,22 @@
 
         pythonEnv = pkgs.python3.withPackages (ps: with ps; [
           setuptools
+          wheel
         ]);
 
         metaprocessor = pkgs.python3.pkgs.buildPythonPackage rec {
-          format = "pyproject";
-
           pname = "metaprocessor";
           inherit ((pkgs.lib.importTOML ./pyproject.toml).project) version;
 
+          format = "pyproject";
+          disabled = pkgs.python3.pkgs.pythonOlder "3";
+
           src = pkgs.lib.cleanSource ./.;
+
+          buildInputs = with pkgs; [
+            openssl
+            cffi
+          ];
 
           propagatedBuildInputs = [
             pythonEnv
