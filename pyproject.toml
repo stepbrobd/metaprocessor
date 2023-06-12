@@ -17,21 +17,41 @@ classifiers = [
 ]
 requires-python = ">=3"
 dependencies = [
-    "click",
-    "click-option-group",
-    "metawear;platform_system!='Darwin' and platform_system!='Windows'",
-    "rich",
-    "tqdm",
-    "toml",
-    "numpy",
-    "pandas",
-    "pyarrow",
-    "boto3",
+    "click>=8.1.3",
+    "click-option-group>=0.5.5",
+    "metawear>=1.0.8; platform_system!='Darwin' and platform_system!='Windows'",
+    "rich>=13.3.1",
+    "tqdm>=4.65.0",
+    "toml>=0.10.2",
+    "numpy>=1.24.2",
+    "pandas>=1.5.3",
+    "pyarrow>=11.0.0",
+    "boto3>=1.26.78",
 ]
 
 [project.urls]
-Repository = "https://github.com/StepBroBD/MetaProcessor"
+Documentation = "https://metaprocessor.org"
+Repository = "https://github.com/metaprocessor/metaprocessor"
+Issues = "https://github.com/metaprocessor/metaprocessor/issues"
 
 [project.scripts]
 metaprocessor = "metaprocessor.cli:cli"
 mp = "metaprocessor.cli:cli"
+
+[tool.ruff]
+ignore = [
+    "E501", # line too long, handled by black
+    "B008", # do not perform function calls in argument defaults
+    "C901", # too complex
+]
+select = [
+    "E", # pycodestyle errors
+    "W", # pycodestyle warnings
+    "F", # pyflakes
+    "I", # isort
+    "C", # flake8-comprehensions
+    "B", # flake8-bugbear
+]
+
+[tool.ruff.isort]
+known-first-party = ["metaprocessor"]
