@@ -1,16 +1,17 @@
-import click
-from click_option_group import optgroup, MutuallyExclusiveOptionGroup
-from rich import print
-import pandas as pd
-import os
-import json as libjson
 import datetime
-import time
+import json as libjson
+import os
 import pathlib
-import botocore
+import time
 from concurrent.futures.thread import ThreadPoolExecutor
-import metaprocessor.helpers.config
+
+import click
+import pandas as pd
+from click_option_group import MutuallyExclusiveOptionGroup, optgroup
+from rich import print
+
 import metaprocessor.helpers.boto3
+import metaprocessor.helpers.config
 
 
 @click.group()
@@ -62,7 +63,7 @@ def ls(local: bool, remote: bool, json: bool) -> None:
         if location is None:
             print(
                 "[white][red]No location set[/red], "
-                "please run [u]\[metaprocessor|mp] config edit[/u] to set location.[/white]"
+                "please run [u]\\[metaprocessor|mp] config edit[/u] to set location.[/white]"
             )
             return
         else:
@@ -135,7 +136,7 @@ def ls(local: bool, remote: bool, json: bool) -> None:
     if len(result) == 0:
         print(
             "[white][red]No objects found[/red], "
-            "please make sure configurations are correctly setup or run [u]\[metaprocessor|mp] objects upload[/u] to upload objects.[/white]"
+            "please make sure configurations are correctly setup or run [u]\\[metaprocessor|mp] objects upload[/u] to upload objects.[/white]"
         )
         return
     else:
@@ -205,7 +206,7 @@ def download(key: str) -> None:
     if not base:
         print(
             "[white][red]No location set[/red], "
-            "please run [u]\[metaprocessor|mp] config edit[/u] to set location.[/white]"
+            "please run [u]\\[metaprocessor|mp] config edit[/u] to set location.[/white]"
         )
         return
 
