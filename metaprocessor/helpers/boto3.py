@@ -1,9 +1,10 @@
-import boto3
-import metaprocessor.helpers.config
-import os
 import hashlib
-from rich import print
+import os
+
+import boto3
 from tqdm import tqdm
+
+import metaprocessor.helpers.config
 
 
 class Progress:

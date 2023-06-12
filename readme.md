@@ -1,15 +1,16 @@
 # MetaProcessor
 
-![GitHub Action Status](https://github.com/MetaProcessor/MetaProcessor/actions/workflows/build-linux.yml/badge.svg)
+![Ruff Status](https://github.com/MetaProcessor/MetaProcessor/actions/workflows/ruff.yml/badge.svg)
 
-![GitHub Action Status](https://github.com/MetaProcessor/MetaProcessor/actions/workflows/release.yml/badge.svg)
+![Build Status (Linux)](https://github.com/MetaProcessor/MetaProcessor/actions/workflows/build-linux.yml/badge.svg)
+
+![Release Status](https://github.com/MetaProcessor/MetaProcessor/actions/workflows/release.yml/badge.svg)
 
 MetaProcessor, all-in-one data pipeline for MbientLab MetaWear series sensors!
 
 ## Setup
 
 Note: It's not required but strongly recommended to use `virtualenv`.
-
 
 ## License
 
