@@ -46,3 +46,37 @@ mp objects ls --json
 ```
 
 For more information, run `mp objects ls --help`.
+
+## Move Objects
+
+Move (or rename) objects managed by MetaProcessor.
+
+## Remove Objects
+
+Delete objects from MetaProcessor, local file system, or remote object store service provider.
+
+## Upload Objects
+
+Upload objects to remote object store service provider.
+
+## Download Objects
+
+Download objects from remote object store service provider.
+
+To download all objects, use the `download` command (concurrent by default):
+
+```shell
+mp objects download
+```
+
+To download a specific object, use the `--key` flag:
+
+```shell
+mp objects download --key <object_key>
+```
+
+The object key can be obtained by running the `ls` command.
+
+The `download` command is lazy, it will only download the object if it doesn't exist locally, or local object's checksum doesn't match the remote object's checksum.
+
+For more information, run `mp objects download --help`.

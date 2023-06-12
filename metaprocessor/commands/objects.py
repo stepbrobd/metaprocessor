@@ -7,6 +7,8 @@ import json as libjson
 import datetime
 import time
 import pathlib
+import botocore
+from concurrent.futures.thread import ThreadPoolExecutor
 import metaprocessor.helpers.config
 import metaprocessor.helpers.boto3
 
@@ -154,6 +156,10 @@ def mv() -> None:
     """
     Move (or rename) objects managed by MetaProcessor.
     """
+    print(
+        "[white][red]Not implemented yet[/red], "
+        "please see [u]https://github.com/metaprocessor/metaprocessor/blob/master/metaprocessor/commands/objects.py[/u] to check implantation status.[/white]"
+    )
 
 
 @objects.command()
@@ -161,6 +167,10 @@ def rm() -> None:
     """
     Delete objects from MetaProcessor.
     """
+    print(
+        "[white][red]Not implemented yet[/red], "
+        "please see [u]https://github.com/metaprocessor/metaprocessor/blob/master/metaprocessor/commands/objects.py[/u] to check implantation status.[/white]"
+    )
 
 
 @objects.command()
@@ -171,7 +181,65 @@ def upload() -> None:
 
 
 @objects.command()
-def download() -> None:
+@click.option(
+    "--key",
+    required=False,
+    help="Key of the object to download.",
+)
+def download(key: str) -> None:
     """
     Download objects from cloud object store.
     """
+    config = metaprocessor.helpers.config.read()
+    response = metaprocessor.helpers.boto3.list_objects()
+    etags = {
+        object["Key"]: object["ETag"]
+        for object in response.get("Versions", [])
+    }
+    sizes = {
+        object["Key"]: object["Size"]
+        for object in response.get("Versions", [])
+    }
+
+    base = config.get("general", {}).get("gd-location")
+    if not base:
+        print(
+            "[white][red]No location set[/red], "
+            "please run [u]\[metaprocessor|mp] config edit[/u] to set location.[/white]"
+        )
+        return
+
+    def cached_download(key: str) -> None:
+        location = pathlib.Path(base) / key
+
+        for parent in reversed(location.parents):
+            if not parent.exists():
+                parent.mkdir()
+
+        if location.is_file() and metaprocessor.helpers.boto3.verify_object(str(location), etags[key]):
+            print(
+                f"[white][green]Object with key \"{key}\" already exists[/green], "
+                f"the integrity of the file has been verified, skipping download.[/white]"
+            )
+        else:
+            metaprocessor.helpers.boto3.download_object(
+                key, str(location), sizes[key]
+            )
+
+    if not key:
+        valid_keys = []
+        deleted_keys = []
+
+        for object in response.get("Versions", []):
+            if object["Size"] > 0 and object["Key"][-1] != "/":
+                valid_keys.append(object["Key"])
+
+        for object in response.get("DeleteMarkers", []):
+            deleted_keys.append(object["Key"])
+
+        keys = [key for key in valid_keys if key not in deleted_keys]
+
+        with ThreadPoolExecutor() as executor:
+            executor.map(cached_download, keys)
+    else:
+        cached_download(key)
