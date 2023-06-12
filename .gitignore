@@ -6,6 +6,9 @@
 **/node_modules/
 **/.next/
 
+# Ruff
+.ruff_cache/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
