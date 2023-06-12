@@ -1,7 +1,9 @@
-import click
 import json as libjson
-import metaprocessor.helpers.config
+
+import click
 from rich import print
+
+import metaprocessor.helpers.config
 
 
 @click.group()
@@ -48,7 +50,7 @@ def init(interactive: bool, force: bool) -> None:
     if metaprocessor.helpers.config.exist() and not force:
         print(
             "[white][red]Configuration file already exists[/red], "
-            f"please run [u]\[metaprocessor|mp] config edit[/u] instead, "
+            "please run [u]\\[metaprocessor|mp] config edit[/u] instead, "
             "or use [u]--force[/u] to overwrite.[/white]"
         )
         raise SystemExit(1)
@@ -77,7 +79,7 @@ def edit() -> None:
     if not metaprocessor.helpers.config.exist():
         print(
             "[white][red]No configuration file found[/red], "
-            f"please run [u]\[metaprocessor|mp] config init[/u] first.[/white]"
+            "please run [u]\\[metaprocessor|mp] config init[/u] first.[/white]"
         )
         return
     else:
@@ -92,7 +94,7 @@ def check() -> None:
     if not metaprocessor.helpers.config.exist():
         print(
             "[white][red]No configuration file found[/red], "
-            f"please run [u]\[metaprocessor|mp] config init[/u] first.[/white]"
+            "please run [u]\\[metaprocessor|mp] config init[/u] first.[/white]"
         )
         return
     else:
@@ -136,7 +138,7 @@ def check() -> None:
         else:
             print(
                 f"[white][red]{error_count} error(s) found.[/red]\n"
-                f"Please run [u]\[metaprocessor|mp] config edit[/u] to fix above error(s).[/white]"
+                f"Please run [u]\\[metaprocessor|mp] config edit[/u] to fix above error(s).[/white]"
             )
 
 
@@ -153,7 +155,7 @@ def show(json: bool) -> None:
     if not metaprocessor.helpers.config.exist():
         print(
             "[white][red]No configuration file found[/red], "
-            f"please run [u]\[metaprocessor|mp] config init[/u] first.[/white]"
+            "please run [u]\\[metaprocessor|mp] config init[/u] first.[/white]"
         )
         return
     else:
