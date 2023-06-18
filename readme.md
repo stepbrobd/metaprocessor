@@ -10,7 +10,7 @@ MetaProcessor, all-in-one data pipeline for MbientLab MetaWear series sensors!
 
 ## Setup
 
-Note: It's not required but strongly recommended to use `virtualenv`.
+It's not required but we strongly recommended all users and contributers to use [Nix](https://nixos.org) and [Nix development environment](https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-develop.html).
 
 ## License
 
