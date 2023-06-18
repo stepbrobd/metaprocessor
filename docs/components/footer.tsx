@@ -18,6 +18,7 @@ const Footer = () => {
         </a>
       </small>
       <small>
+        Project of{" "}
         <a href="https://iss.mech.utah.edu" target="_blank">
           <u>ISS Lab</u>
         </a>{" "}
