@@ -15,9 +15,22 @@
         pkgs = nixpkgs.legacyPackages.${system};
 
         pythonEnv = pkgs.python3.withPackages (ps: with ps; [
+          pip
           setuptools
           wheel
-        ]);
+
+          boto3
+          click
+          click-option-group
+          numpy
+          pandas
+          pyarrow
+          rich
+          toml
+          tqdm
+        ] ++ pkgs.lib.optionals pkgs.stdenv.isLinux (with ps; [
+          metawear
+        ]));
 
         metaprocessor = pkgs.python3.pkgs.buildPythonPackage rec {
           pname = "metaprocessor";
@@ -27,11 +40,6 @@
           disabled = pkgs.python3.pkgs.pythonOlder "3";
 
           src = pkgs.lib.cleanSource ./.;
-
-          buildInputs = with pkgs; [
-            openssl
-            cffi
-          ];
 
           propagatedBuildInputs = [
             pythonEnv
@@ -50,6 +58,7 @@
             pythonEnv
             ruff
             openssl
+            libffi
           ];
         };
 
