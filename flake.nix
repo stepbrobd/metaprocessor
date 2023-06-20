@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "flake:nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "flake:nixpkgs/master";
     utils.url = "flake:flake-utils";
   };
 
@@ -13,12 +13,21 @@
     (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
+        lib = pkgs.lib;
+        stdenv = pkgs.stdenv;
 
-        pythonEnv = pkgs.python3.withPackages (ps: with ps; [
+        python3 = pkgs.python3;
+        withPackages = python3.withPackages;
+        buildPythonPackage = python3.pkgs.buildPythonPackage;
+        pythonOlder = python3.pkgs.pythonOlder;
+
+        pythonDevEnv = withPackages (ps: with ps; [
           pip
           setuptools
           wheel
+        ]);
 
+        pythonBuildEnv = withPackages (ps: with ps; [
           boto3
           click
           click-option-group
@@ -28,22 +37,21 @@
           rich
           toml
           tqdm
-        ] ++ pkgs.lib.optionals pkgs.stdenv.isLinux (with ps; [
+        ] ++ lib.optionals stdenv.isLinux (with ps; [
           metawear
         ]));
 
-        metaprocessor = pkgs.python3.pkgs.buildPythonPackage rec {
+        metaprocessor = buildPythonPackage rec {
           pname = "metaprocessor";
-          inherit ((pkgs.lib.importTOML ./pyproject.toml).project) version;
-
+          inherit ((lib.importTOML ./pyproject.toml).project) version;
           format = "pyproject";
-          disabled = pkgs.python3.pkgs.pythonOlder "3";
+          disabled = pythonOlder "3";
 
-          src = pkgs.lib.cleanSource ./.;
+          enableParallelBuilding = true;
 
-          propagatedBuildInputs = [
-            pythonEnv
-          ];
+          src = lib.cleanSource ./.;
+
+          propagatedBuildInputs = [ pythonBuildEnv ];
         };
       in
       {
@@ -55,10 +63,10 @@
 
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [
-            pythonEnv
             ruff
-            openssl
-            libffi
+
+            pythonDevEnv
+            pythonBuildEnv
           ];
         };
 
