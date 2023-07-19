@@ -99,4 +99,4 @@ def etag_checksum(filename: str, chunk_size: int = 8 * 1024 * 1024) -> str:
         for data in iter(lambda: f.read(chunk_size), b''):
             md5s.append(hashlib.md5(data).digest())
     m = hashlib.md5(b"".join(md5s))
-    return '{}-{}'.format(m.hexdigest(), len(md5s))
+    return f'{m.hexdigest()}-{len(md5s)}'
