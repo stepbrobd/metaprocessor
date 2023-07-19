@@ -14,12 +14,23 @@ const config: DocsThemeConfig = {
   },
 
   logo: <Logo />,
+  logoLink: "/",
 
   project: {
     link: "https://github.com/metaprocessor/metaprocessor",
   },
   docsRepositoryBase:
     "https://github.com/metaprocessor/metaprocessor/tree/master/docs",
+
+  sidebar: {
+    autoCollapse: true,
+    toggleButton: true,
+    defaultMenuCollapseLevel: 999,
+  },
+
+  toc: {
+    float: true,
+  },
 
   useNextSeoProps() {
     const { asPath } = useRouter();
