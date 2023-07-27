@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "flake:nixpkgs/master";
+    nixpkgs.url = "flake:nixpkgs/nixpkgs-unstable";
     utils.url = "flake:flake-utils";
   };
 
@@ -30,6 +30,7 @@
         pythonBuildEnv = withPackages (ps: with ps; [
           boto3
           click
+          click-aliases
           click-option-group
           numpy
           pandas
