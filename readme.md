@@ -22,6 +22,6 @@ Powered by [![Powered by Vercel](/docs/public/vercel.svg)](https://vercel.com?ut
 
 Project of [ISS Lab](https://iss.mech.utah.edu/) and [Bateman Horne Center](https://batemanhornecenter.org/).
 
-Licensed under the [MIT License](/license.md).
-
 &copy; 2023 [MetaProcessor contributors](https://github.com/metaprocessor/metaprocessor/graphs/contributors).
+
+Licensed under the [MIT License](/license.md).
