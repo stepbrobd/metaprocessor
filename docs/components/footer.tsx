@@ -93,7 +93,7 @@ const Footer = () => {
           href="https://github.com/metaprocessor/metaprocessor/graphs/contributors"
           target="_blank"
         >
-          <u>MetaProcessor Contributors</u>
+          <u>MetaProcessor contributors</u>
         </a>
       </small>
     </div>
