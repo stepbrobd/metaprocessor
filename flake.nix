@@ -4,30 +4,23 @@
     utils.url = "flake:flake-utils";
   };
 
-  outputs = { self, nixpkgs, utils, ... }: utils.lib.eachSystem [
-    "aarch64-darwin"
-    "x86_64-darwin"
-    "aarch64-linux"
-    "x86_64-linux"
-  ]
-    (system:
+  outputs =
+    { self
+    , nixpkgs
+    , utils
+    , ...
+    }: utils.lib.eachDefaultSystem
+      (system:
       let
-        pkgs = nixpkgs.legacyPackages.${system};
+        pkgs = import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+        };
         lib = pkgs.lib;
-        stdenv = pkgs.stdenv;
+        stdenv = if pkgs.stdenv.isLinux then pkgs.stdenv else pkgs.clangStdenv;
 
         python3 = pkgs.python3;
-        withPackages = python3.withPackages;
-        buildPythonPackage = python3.pkgs.buildPythonPackage;
-        pythonOlder = python3.pkgs.pythonOlder;
-
-        pythonDevEnv = withPackages (ps: with ps; [
-          pip
-          setuptools
-          wheel
-        ]);
-
-        pythonBuildEnv = withPackages (ps: with ps; [
+        python3Env = python3.withPackages (ps: with ps; [
           boto3
           click
           click-aliases
@@ -42,35 +35,36 @@
           metawear
         ]));
 
-        metaprocessor = buildPythonPackage rec {
+        metaprocessor = python3.pkgs.buildPythonPackage rec {
           pname = "metaprocessor";
           inherit ((lib.importTOML ./pyproject.toml).project) version;
+
           format = "pyproject";
-          disabled = pythonOlder "3";
+          disabled = python3.pkgs.pythonOlder "3";
 
           enableParallelBuilding = true;
-
           src = lib.cleanSource ./.;
-
-          propagatedBuildInputs = [ pythonBuildEnv ];
+          propagatedBuildInputs = [ python3Env ];
         };
       in
       {
+        formatter = pkgs.nixpkgs-fmt;
+
         packages.default = metaprocessor;
 
-        overlays.default = _: prev: {
-          metaprocessor = prev.metaprocessor.override { };
-        };
-
         devShells.default = pkgs.mkShell {
-          packages = with pkgs; [
-            pythonDevEnv
-            pythonBuildEnv
-            ruff
-          ];
+          packages = [ pkgs.ruff ];
+          buildInputs = [ python3Env python3.pkgs.venvShellHook ];
+          venvDir = ".venv";
+          postVenvCreation = ''
+            pip install --upgrade pip setuptools wheel
+            pip install --editable .
+          '';
         };
-
-        formatter = pkgs.nixpkgs-fmt;
       }
-    );
+      ) // {
+      overlays.default = final: prev: {
+        inherit (self.packages.${final.system}) metaprocessor;
+      };
+    };
 }
