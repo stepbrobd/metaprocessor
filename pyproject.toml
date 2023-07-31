@@ -67,6 +67,10 @@ ignore = [
 "metaprocessor/helpers/boto3.py" = [
   "S324", # Probable use of insecure hash functions in `hashlib`: `md5`
 ]
+"metaprocessor/helpers/completion.py" = [
+  "S602", # `subprocess` call with `shell=True` seems safe, but may be changed in the future; consider rewriting without `shell`
+  "S607", # Starting a process with a partial executable path
+]
 "metaprocessor/helpers/config.py" = [
   "S605", # Starting a process with a shell, possible injection detected
 ]
