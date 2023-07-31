@@ -7,6 +7,7 @@ from concurrent.futures.thread import ThreadPoolExecutor
 
 import click
 import pandas as pd
+from click_aliases import ClickAliasedGroup
 from click_option_group import MutuallyExclusiveOptionGroup, optgroup
 from rich import print
 
@@ -14,15 +15,15 @@ import metaprocessor.helpers.boto3
 import metaprocessor.helpers.config
 
 
-@click.group()
-def objects() -> None:
+@click.group(cls=ClickAliasedGroup)
+def object() -> None:
     """
     Manage MetaProcessor objects.
     """
     pass
 
 
-@objects.command()
+@object.command(aliases = ["ls"])
 @optgroup.group(
     "Target location settings",
     help="List either local or remote objects, if no flags are provided, all objects will be listed.",
@@ -43,7 +44,7 @@ def objects() -> None:
     is_flag=True,
     help="Show objects in JSON format.",
 )
-def ls(local: bool, remote: bool, json: bool) -> None:
+def list(local: bool, remote: bool, json: bool) -> None:
     """
     List objects managed by MetaProcessor.
     """
@@ -152,8 +153,8 @@ def ls(local: bool, remote: bool, json: bool) -> None:
         print(result)
 
 
-@objects.command()
-def mv() -> None:
+@object.command(aliases=["mv"])
+def move() -> None:
     """
     Move (or rename) objects managed by MetaProcessor.
     """
@@ -163,8 +164,8 @@ def mv() -> None:
     )
 
 
-@objects.command()
-def rm() -> None:
+@object.command(aliases=["rm"])
+def remove() -> None:
     """
     Delete objects from MetaProcessor.
     """
@@ -174,14 +175,14 @@ def rm() -> None:
     )
 
 
-@objects.command()
+@object.command(aliases=["up"])
 def upload() -> None:
     """
     Upload objects to cloud object store.
     """
 
 
-@objects.command()
+@object.command(aliases=["dl"])
 @click.option(
     "--key",
     required=False,
