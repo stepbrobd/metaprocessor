@@ -3,4 +3,66 @@ title: "Shell Completion"
 description: "How to enable shell completion for MetaProcessor CLI"
 ---
 
-# Enable Shell Completion
+# Enabling Shell Completion
+
+MetaProcessor CLI supports shell completion for `bash`, `zsh`, and `fish`.
+
+## General
+
+To enable shell completion, run the following command (modification required, do not copy/paste directly):
+
+```shell
+eval "$(mp|metaprocessor completion bash|zsh|fish)"
+```
+
+Depending on your preferences, you should use either `mp` or `metaprocessor` in the command above (no difference).
+Also, you should replace `bash|zsh|fish` with the shell you are using.
+In the following guides, we will use `mp` for simplicity.
+
+## Bash
+
+To enable shell completion for `bash`, run the following command:
+
+```shell
+eval "$(mp completion bash)"
+```
+
+To enable shell completion for `bash` at the start of each interactive shell session, run the following command:
+
+```shell
+echo 'eval "$(mp completion bash)"' >> ~/.bashrc
+```
+
+and restart your shell session.
+
+## Zsh
+
+To enable shell completion for `zsh`, run the following command:
+
+```shell
+eval "$(mp completion zsh)"
+```
+
+To enable shell completion for `zsh` at the start of each interactive shell session, run the following command:
+
+```shell
+echo 'eval "$(mp completion zsh)"' >> ~/.zshrc
+```
+
+and restart your shell session.
+
+## Fish
+
+To enable shell completion for `fish`, run the following command:
+
+```shell
+mp completion fish | source
+```
+
+To enable shell completion for `fish` at the start of each interactive shell session, run the following command:
+
+```shell
+mp completion fish > ~/.config/fish/completions/mp.fish
+```
+
+and restart your shell session.

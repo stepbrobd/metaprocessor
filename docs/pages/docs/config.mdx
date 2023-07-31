@@ -82,6 +82,23 @@ If the configuration file is not present, an error will be thrown. To create a n
 mp config init
 ```
 
+## Example
+
+```toml
+[general]
+utc-offset = -7.0
+gd-location = "~/MetaProcessor/Data/"
+gp-regex = "*"
+sg-regex = "(END|AEO)[0-9]{3}" # END or AEO followed by 3 digits
+sp-regex = "BHC[0-9]{4}-[0-9]" # BHC followed by 4 digits and a dash and a digit
+sd-regex = "D[0-9]{3}"         # D followed by 3 digits
+
+[aws]
+bucket = "<bucket name>"
+access-key = "<access key>"
+secret-key = "<secret key>"
+```
+
 ## Configuration Options
 
 The configuration file is a [TOML](https://toml.io/en/) file. The following options are available:
