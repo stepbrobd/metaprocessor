@@ -64,10 +64,9 @@
 
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [
-            ruff
-
             pythonDevEnv
             pythonBuildEnv
+            ruff
           ];
         };
 
