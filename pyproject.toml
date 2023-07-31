@@ -10,22 +10,23 @@ readme = "readme.md"
 license = { file = "license.md" }
 authors = [{ name = "StepBroBD", email = "Hi@StepBroBD.com" }]
 classifiers = [
-    "Environment :: Console",
-    "Intended Audience :: Science/Research",
-    "Programming Language :: Python",
-    "Programming Language :: Python :: 3 :: Only",
+  "Environment :: Console",
+  "Intended Audience :: Science/Research",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3 :: Only",
 ]
 dependencies = [
-    "click>=8.1.3",
-    "click-option-group>=0.5.5",
-    "metawear>=1.0.8; platform_system=='Linux'",
-    "rich>=13.3.5",
-    "tqdm>=4.64.1",
-    "toml>=0.10.2",
-    "numpy>=1.24.2",
-    "pandas>=1.5.3",
-    "pyarrow>=12.0.0",
-    "boto3>=1.26.79",
+  "boto3>=1.26.79",
+  "click>=8.1.3",
+  "click-aliases>=1.0.1",
+  "click-option-group>=0.5.5",
+  "numpy>=1.24.2",
+  "pandas>=1.5.3",
+  "pyarrow>=12.0.0",
+  "rich>=13.3.5",
+  "toml>=0.10.2",
+  "tqdm>=4.64.1",
+  "metawear>=1.0.8; platform_system=='Linux'",
 ]
 requires-python = ">=3"
 
@@ -65,6 +66,10 @@ ignore = [
 [tool.ruff.per-file-ignores]
 "metaprocessor/helpers/boto3.py" = [
   "S324", # Probable use of insecure hash functions in `hashlib`: `md5`
+]
+"metaprocessor/helpers/completion.py" = [
+  "S602", # `subprocess` call with `shell=True` seems safe, but may be changed in the future; consider rewriting without `shell`
+  "S607", # Starting a process with a partial executable path
 ]
 "metaprocessor/helpers/config.py" = [
   "S605", # Starting a process with a shell, possible injection detected
