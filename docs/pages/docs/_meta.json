@@ -1,5 +1,6 @@
 {
   "index": "Getting Started",
+  "completion": "Shell Completion",
   "config": "Configurations",
   "object": "Session Data Management"
 }
