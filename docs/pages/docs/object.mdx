@@ -22,19 +22,19 @@ The session data management tool can list, move, remove, upload, and download se
 To list all sessions (local or remote), use the `ls` command:
 
 ```shell
-mp objects ls
+mp object ls
 ```
 
 To list remote sessions only, use the `--remote` flag:
 
 ```shell
-mp objects ls --remote
+mp object ls --remote
 ```
 
 To list local sessions only, use the `--local` flag:
 
 ```shell
-mp objects ls --local
+mp object ls --local
 ```
 
 The `--remote` and `--local` flags are mutually exclusive, to list all sessions, simple omit both flags.
@@ -42,10 +42,10 @@ The `--remote` and `--local` flags are mutually exclusive, to list all sessions,
 The output of the `ls` command can be serialized to JSON format using the `--json` flag:
 
 ```shell
-mp objects ls --json
+mp object ls --json
 ```
 
-For more information, run `mp objects ls --help`.
+For more information, run `mp object ls --help`.
 
 ## Move Objects
 
@@ -66,17 +66,17 @@ Download objects from remote object store service provider.
 To download all objects, use the `download` command (concurrent by default):
 
 ```shell
-mp objects download
+mp object download
 ```
 
 To download a specific object, use the `--key` flag:
 
 ```shell
-mp objects download --key <object_key>
+mp object download --key <object_key>
 ```
 
 The object key can be obtained by running the `ls` command.
 
 The `download` command is lazy, it will only download the object if it doesn't exist locally, or local object's checksum doesn't match the remote object's checksum.
 
-For more information, run `mp objects download --help`.
+For more information, run `mp object download --help`.
