@@ -16,14 +16,14 @@ import metaprocessor.helpers.config
 
 
 @click.group(cls=ClickAliasedGroup)
-def objects() -> None:
+def object() -> None:
     """
     Manage MetaProcessor objects.
     """
     pass
 
 
-@objects.command(aliases = ["ls"])
+@object.command(aliases = ["ls"])
 @optgroup.group(
     "Target location settings",
     help="List either local or remote objects, if no flags are provided, all objects will be listed.",
@@ -153,7 +153,7 @@ def list(local: bool, remote: bool, json: bool) -> None:
         print(result)
 
 
-@objects.command(aliases=["mv"])
+@object.command(aliases=["mv"])
 def move() -> None:
     """
     Move (or rename) objects managed by MetaProcessor.
@@ -164,7 +164,7 @@ def move() -> None:
     )
 
 
-@objects.command(aliases=["rm"])
+@object.command(aliases=["rm"])
 def remove() -> None:
     """
     Delete objects from MetaProcessor.
@@ -175,14 +175,14 @@ def remove() -> None:
     )
 
 
-@objects.command(aliases=["up"])
+@object.command(aliases=["up"])
 def upload() -> None:
     """
     Upload objects to cloud object store.
     """
 
 
-@objects.command(aliases=["dl"])
+@object.command(aliases=["dl"])
 @click.option(
     "--key",
     required=False,
