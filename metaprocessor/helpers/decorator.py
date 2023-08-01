@@ -6,6 +6,13 @@ import click
 from rich import print
 
 
+def metawear(func: Callable) -> Callable:
+    def wrapper(*args, **kwargs) -> Callable:
+        if sys.platform == "linux":
+            return func(*args, **kwargs)
+    return wrapper
+
+
 def linux_only(func: Callable) -> Callable:
     @click.pass_context
     def wrapper(ctx, *args, **kwargs) -> Callable:
