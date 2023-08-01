@@ -1,4 +1,3 @@
-
 import click
 
 from metaprocessor.helpers.completion import generate
