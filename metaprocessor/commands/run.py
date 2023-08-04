@@ -38,6 +38,8 @@ def preprocess(key: str) -> None:
             print(f"[red]Provided session file [u]{task}[/u] does not exist.[/red]")
             raise SystemExit(1)
 
+    print(f"[green]Preprocessing {len(tasks)} session(s).[/green]")
+
     with ThreadPoolExecutor() as executor:
         executor.map(
             metaprocessor.helpers.workflow.preprocess,

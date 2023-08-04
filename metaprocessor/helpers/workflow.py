@@ -5,6 +5,7 @@ import time
 import zipfile
 
 import pandas as pd
+from rich import print
 
 
 def generate_tasks(config: dict) -> list:
@@ -95,6 +96,8 @@ def preprocess(task: pathlib.Path, config: dict) -> None:
     acce = folder/(folder.name+"-Accelerometer.csv")
     gyro = folder/(folder.name+"-Gyroscope.csv")
 
+    print(f"[green]Preprocessing {folder.name}[/green]")
     df = merge(acce, gyro, start, end)
     df.to_csv(folder/(folder.name+"-Preprocessed.csv"), index=False)
     df.to_feather(folder/(folder.name+"-Preprocessed.feather"))
+    print(f"[green]Preprocessed {folder.name}[/green]")
