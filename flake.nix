@@ -20,7 +20,8 @@
         stdenv = if pkgs.stdenv.isLinux then pkgs.stdenv else pkgs.clangStdenv;
 
         python3 = pkgs.python3;
-        python3Env = python3.withPackages (ps: with ps; [
+        python3VenvDir = ".venv";
+        python3Env = (python3.withPackages (ps: with ps; [
           boto3
           click
           click-aliases
@@ -34,7 +35,7 @@
           tqdm
         ] ++ lib.optionals stdenv.isLinux (with ps; [
           metawear
-        ]));
+        ]))).override (args: { ignoreCollisions = true; });
 
         metaprocessor = python3.pkgs.buildPythonPackage rec {
           pname = "metaprocessor";
@@ -54,12 +55,28 @@
         packages.default = metaprocessor;
 
         devShells.default = pkgs.mkShell {
-          packages = [ pkgs.ruff ];
-          buildInputs = [ python3Env python3.pkgs.venvShellHook ];
-          venvDir = ".venv";
+          packages = with pkgs; [
+            direnv
+            nix-direnv
+            git
+            ruff
+          ];
+
+          buildInputs = [
+            python3
+            python3Env
+            python3.pkgs.venvShellHook
+          ];
+
+          venvDir = python3VenvDir;
+
           postVenvCreation = ''
             pip install --upgrade pip setuptools wheel
             pip install --editable .
+          '';
+
+          shellHook = ''
+            export PYTHONPATH=$PWD/${python3VenvDir}/${python3.sitePackages}/:$PYTHONPATH
           '';
         };
       }
