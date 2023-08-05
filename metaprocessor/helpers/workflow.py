@@ -101,3 +101,11 @@ def preprocess(task: pathlib.Path, config: dict) -> None:
     df.to_csv(folder/(folder.name+"-Preprocessed.csv"), index=False)
     df.to_feather(folder/(folder.name+"-Preprocessed.feather"))
     print(f"[green]Preprocessed {folder.name}[/green]")
+
+
+def uptime(task: pathlib.Path, config: dict) -> None:
+    pass
+
+
+def steps(task: pathlib.Path, config: dict) -> None:
+    pass
