@@ -29,6 +29,7 @@
           pandas
           pyarrow
           rich
+          scipy
           toml
           tqdm
         ] ++ lib.optionals stdenv.isLinux (with ps; [

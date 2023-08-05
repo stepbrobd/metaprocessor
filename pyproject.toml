@@ -24,6 +24,7 @@ dependencies = [
   "pandas>=1.5.3",
   "pyarrow>=12.0.0",
   "rich>=13.3.5",
+  "scipy>=1.11.1",
   "toml>=0.10.2",
   "tqdm>=4.64.1",
   "metawear>=1.0.8; platform_system=='Linux'",
@@ -64,6 +65,9 @@ ignore = [
 ]
 
 [tool.ruff.per-file-ignores]
+"metaprocessor/__init__.py" = [
+  "F401", # Imported but unused
+]
 "metaprocessor/helpers/boto3.py" = [
   "S324", # Probable use of insecure hash functions in `hashlib`: `md5`
 ]

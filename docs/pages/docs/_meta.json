@@ -2,5 +2,7 @@
   "index": "Getting Started",
   "completion": "Shell Completion",
   "config": "Configurations",
-  "object": "Session Data Management"
+  "object": "Session Data Management",
+  "run": "Running Workflows",
+  "lib": "Use as a Library"
 }
