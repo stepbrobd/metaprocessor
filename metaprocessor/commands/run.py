@@ -110,3 +110,16 @@ def steps(key: str) -> None:
             tasks,
             [config]*len(tasks),
         )
+
+
+@run.command()
+@click.option(
+    "--key",
+    required=False,
+    help="Key of the session to be processed.",
+)
+def report(key: str) -> None:
+    """
+    Report generation.
+    """
+    pass
