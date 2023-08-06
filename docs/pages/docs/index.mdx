@@ -3,4 +3,53 @@ title: "Getting Started"
 description: "Getting started with MetaProcessor."
 ---
 
+import { Cards, Card } from "nextra/components";
+import {
+  IconAdjustments,
+  IconApps,
+  IconBooks,
+  IconCylinder,
+  IconPlayerTrackNext,
+  IconPrompt,
+} from "@tabler/icons-react";
+
 # Getting Started
+
+The following topics might help you get a better understanding of MetaProcessor.
+
+## CLI
+
+<Cards>
+  <Card
+    icon={<IconPrompt />}
+    title="Shell Completion"
+    href="/docs/completion"
+  />
+  <Card icon={<IconAdjustments />} title="Configurations" href="/docs/config" />
+  <Card
+    icon={<IconCylinder />}
+    title="Session Management"
+    href="/docs/object"
+  />
+  <Card
+    icon={<IconPlayerTrackNext />}
+    title="Running Workflows"
+    href="/docs/run"
+  />
+</Cards>
+
+## Library
+
+<Cards>
+  <Card icon={<IconBooks />} title="Use as a Library" href="/docs/lib" />
+</Cards>
+
+## Development
+
+<Cards>
+  <Card
+    icon={<IconApps />}
+    title="Extending MetaProcessor"
+    href="/docs/develop"
+  />
+</Cards>
