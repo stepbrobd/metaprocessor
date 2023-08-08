@@ -1,0 +1,39 @@
+---
+title: "Extending MetaProcessor"
+description: "Extending MetaProcessor, adding new biomarkers or new CLI functionalities"
+---
+
+# Extending MetaProcessor
+
+You can extend MetaProcessor by forking the [repository](https://github.com/metaprocessor/metaprocessor).
+If you find your extension useful and should be made generally available, please consider contributing it back to the project.
+
+## Development
+
+MetaProcessor is built using [Nix](https://nixos.org), to reduce the complexity of setting up the development environment.
+To get started, install Nix on your system using either the official [installation instructions](https://nixos.org/download.html)
+or the [Determinate Nix Installer](https://github.com/DeterminateSystems/nix-installer)(recommended).
+
+With Nix installed, you can a start development shell with all the dependencies needed to build MetaProcessor with [`direnv`](https://direnv.net):
+
+```shell
+git clone git@github.com:metaprocessor/metaprocessor.git && cd metaprocessor && direnv allow
+```
+
+After the console stops making outputs, MetaProcessor is already installed (editable) in your environment.
+`direnv` will load and unload the environment automatically when you enter and leave the directory.
+To make sure everything is working:
+
+```shell
+mp --help
+```
+
+After this, change the remote to your fork and start hacking!
+
+## Contributing
+
+To contribute, please fork the repository and create a pull request.
+
+If you are adding new CLI commands, please add them to `metaprocessor/cli.py`.
+
+If you are adding modules should be exposed as library functions, please add them `metaprocessor/__init__.py` and add a corresponding test cases.
