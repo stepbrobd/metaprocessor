@@ -2,7 +2,8 @@
   "index": "Getting Started",
   "completion": "Shell Completion",
   "config": "Configurations",
-  "object": "Session Data Management",
+  "object": "Session Management",
   "run": "Running Workflows",
-  "lib": "Use as a Library"
+  "lib": "Use as a Library",
+  "develop": "Extending MetaProcessor"
 }
