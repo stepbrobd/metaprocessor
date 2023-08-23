@@ -5,11 +5,7 @@
   };
 
   outputs =
-    { self
-    , nixpkgs
-    , utils
-    , ...
-    }: utils.lib.eachDefaultSystem
+    { self, nixpkgs, utils }: utils.lib.eachDefaultSystem
       (system:
       let
         pkgs = import nixpkgs {
@@ -19,9 +15,19 @@
         lib = pkgs.lib;
         stdenv = if pkgs.stdenv.isLinux then pkgs.stdenv else pkgs.clangStdenv;
 
+        ldLibraryPath = with pkgs; lib.makeLibraryPath [
+          libffi
+          openssl
+          stdenv.cc.cc
+        ];
+
         python3 = pkgs.python3;
-        python3VenvDir = ".venv";
         python3Env = (python3.withPackages (ps: with ps; [
+          pip
+          setuptools
+          virtualenvwrapper
+          wheel
+
           boto3
           click
           click-aliases
@@ -50,35 +56,34 @@
         };
       in
       {
-        formatter = pkgs.nixpkgs-fmt;
-
         packages.default = metaprocessor;
 
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [
             direnv
-            nix-direnv
             git
+            nix-direnv
             ruff
           ];
 
-          buildInputs = [
-            python3
-            python3Env
-            python3.pkgs.venvShellHook
-          ];
-
-          venvDir = python3VenvDir;
-
-          postVenvCreation = ''
-            pip install --upgrade pip setuptools wheel
-            pip install --editable .
-          '';
+          buildInputs = [ python3Env ];
 
           shellHook = ''
-            export PYTHONPATH=$PWD/${python3VenvDir}/${python3.sitePackages}/:$PYTHONPATH
+            export "LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${ldLibraryPath}"
+            export "SOURCE_DATE_EPOCH=$(date +%s)"
+            export "VENV=.venv"
+
+            if [ ! -d "$VENV" ]; then
+              virtualenv "$VENV"
+            fi
+
+            source "$VENV/bin/activate"
+            export "PYTHONPATH=$PWD/$VENV/${python3.sitePackages}/:$PYTHONPATH"
+            pip install --editable .
           '';
         };
+
+        formatter = pkgs.nixpkgs-fmt;
       }
       ) // {
       overlays.default = final: prev: {
