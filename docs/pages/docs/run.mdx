@@ -14,8 +14,63 @@ Running MetaProcessor workflows, available workflows are:
 
 ## Preprocessor
 
+Before running steps/day or uptime algorithms, you need to run preprocessor workflow to prepare all session data for next steps.
+
+To run preprocessor workflow for all sessions stored locally, run:
+
+```shell
+mp run preprocess
+```
+
+To run preprocessor workflow for specific session, run:
+
+```shell
+mp run preprocess --key <KEY>
+```
+
+Please note that preprocessor will only run for sessions that are saved locally.
+If you are getting errors, please check if you have [downloaded the session data](/docs/object).
+
 ## Steps/Day
+
+To run steps/day algorithm for all sessions stored locally, run:
+
+```shell
+mp run steps
+```
+
+To run steps/day algorithm for specific session, run:
+
+```shell
+mp run steps --key <KEY>
+```
+
+Please note that steps/day algorithm will only run for sessions that are saved locally, and have been preprocessed.
+If you are getting errors, please check if you have [downloaded the session data](/docs/object) and [run preprocessor](#preprocessor).
+
+Results will be saved to `<Session ID>-Results.json` file, to get the results, find the file with corresponding session ID,
+or, check [report generation](#report-generation) section.
 
 ## Upright Position Time
 
+To run uptime algorithm for all sessions stored locally, run:
+
+```shell
+mp run uptime
+```
+
+To run uptime algorithm for specific session, run:
+
+```shell
+mp run uptime --key <KEY>
+```
+
+Please note that uptime algorithm will only run for sessions that are saved locally, and have been preprocessed.
+If you are getting errors, please check if you have [downloaded the session data](/docs/object) and [run preprocessor](#preprocessor).
+
+Results will be saved to `<Session ID>-Results.json` file, to get the results, find the file with corresponding session ID,
+or, check [report generation](#report-generation) section.
+
 ## Report Generation
+
+...WIP
