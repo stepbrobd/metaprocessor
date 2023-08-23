@@ -17,10 +17,10 @@ const config: DocsThemeConfig = {
   logoLink: "/",
 
   project: {
-    link: "https://github.com/metaprocessor/metaprocessor",
+    link: "https://github.com/stepbrobd/metaprocessor",
   },
   docsRepositoryBase:
-    "https://github.com/metaprocessor/metaprocessor/tree/master/docs",
+    "https://github.com/stepbrobd/metaprocessor/tree/master/docs",
 
   sidebar: {
     autoCollapse: true,
