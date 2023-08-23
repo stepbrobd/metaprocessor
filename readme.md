@@ -1,10 +1,10 @@
 # MetaProcessor
 
-![Ruff Status](https://github.com/MetaProcessor/MetaProcessor/actions/workflows/ruff.yml/badge.svg)
+![Ruff Status](https://github.com/stepbrobd/metaprocessor/actions/workflows/ruff.yml/badge.svg)
 
-![Build Status (Linux)](https://github.com/MetaProcessor/MetaProcessor/actions/workflows/build-linux.yml/badge.svg)
+![Build Status (Linux)](https://github.com/stepbrobd/metaprocessor/actions/workflows/build-linux.yml/badge.svg)
 
-![Release Status](https://github.com/MetaProcessor/MetaProcessor/actions/workflows/release.yml/badge.svg)
+![Release Status](https://github.com/stepbrobd/metaprocessor/actions/workflows/release.yml/badge.svg)
 
 MetaProcessor, all-in-one data pipeline for MbientLab MetaWear series sensors!
 
@@ -22,6 +22,6 @@ Powered by [![Powered by Vercel](/docs/public/vercel.svg)](https://vercel.com?ut
 
 Project of [ISS Lab](https://iss.mech.utah.edu/) and [Bateman Horne Center](https://batemanhornecenter.org/).
 
-&copy; 2023 [MetaProcessor contributors](https://github.com/metaprocessor/metaprocessor/graphs/contributors).
+&copy; 2023 [MetaProcessor contributors](https://github.com/stepbrobd/metaprocessor/graphs/contributors).
 
 Licensed under the [MIT License](/license.md).

@@ -69,7 +69,7 @@ const Footer = () => {
 
       <small>
         <a
-          href={`https://github.com/metaprocessor/metaprocessor/commit/${commit}`}
+          href={`https://github.com/stepbrobd/metaprocessor/commit/${commit}`}
           target="_blank"
         >
           <u className="font-mono">{commit.substring(0, 17)}</u>
@@ -90,7 +90,7 @@ const Footer = () => {
       <small>
         &copy; {new Date().getFullYear()}{" "}
         <a
-          href="https://github.com/metaprocessor/metaprocessor/graphs/contributors"
+          href="https://github.com/stepbrobd/metaprocessor/graphs/contributors"
           target="_blank"
         >
           <u>MetaProcessor contributors</u>

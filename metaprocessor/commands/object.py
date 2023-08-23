@@ -160,7 +160,7 @@ def move() -> None:
     """
     print(
         "[white][red]Not implemented yet[/red], "
-        "please see [u]https://github.com/metaprocessor/metaprocessor/blob/master/metaprocessor/commands/objects.py[/u] to check implantation status.[/white]"
+        "please see [u]https://github.com/stepbrobd/metaprocessor/blob/master/metaprocessor/commands/object.py[/u] to check implantation status.[/white]"
     )
 
 
@@ -171,7 +171,7 @@ def remove() -> None:
     """
     print(
         "[white][red]Not implemented yet[/red], "
-        "please see [u]https://github.com/metaprocessor/metaprocessor/blob/master/metaprocessor/commands/objects.py[/u] to check implantation status.[/white]"
+        "please see [u]https://github.com/stepbrobd/metaprocessor/blob/master/metaprocessor/commands/object.py[/u] to check implantation status.[/white]"
     )
 
 
