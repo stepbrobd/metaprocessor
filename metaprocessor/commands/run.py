@@ -122,4 +122,16 @@ def report(key: str) -> None:
     """
     Report generation.
     """
-    pass
+    config = metaprocessor.helpers.config.read()
+
+    if key:
+        tasks = [ pathlib.Path(config["general"]["gd-location"])/key ]
+    else:
+        tasks = metaprocessor.helpers.workflow.generate_tasks(config)
+
+    for task in tasks:
+        if not task.exists():
+            print(f"[red]Provided session file [u]{task}[/u] does not exist.[/red]")
+            raise SystemExit(1)
+
+    metaprocessor.helpers.workflow.report(tasks)

@@ -10,6 +10,8 @@ def uptime(df: pd.DataFrame, gain: float = 1, sample_rate: float = 25, critical_
     This function will return a percentage of the session spent in the upright position.
     Length of the session is solely determined by the length of the provided DataFrame and sample rate.
     """
+    df = df.copy()
+
     # apply gain to all columns except epoc (ms)
     df[df.columns.difference(["epoc (ms)"])] *= gain
 

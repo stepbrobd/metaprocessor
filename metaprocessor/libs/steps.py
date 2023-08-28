@@ -7,6 +7,8 @@ def steps(df: pd.DataFrame) -> int:
     """
     Return an integer representing the number of steps taken during the session.
     """
+    df = df.copy()
+
     df = df.iloc[:, 1:4] * constants.g
     logic = np.ones(len(df))
     steps = np.zeros(len(df))
