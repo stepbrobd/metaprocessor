@@ -8,8 +8,8 @@ description: "Running predefined workflows."
 Running MetaProcessor workflows, available workflows are:
 
 - `preprocessor`: preprocessor workflow, use all locally store session data and prepare them for next steps of calculations.
-- `steps`: run all local session data through steps/day algorithm, results will be saved to `<Session ID>-Results.json` file.
-- `uptime`: run all local session data through uptime algorithm, results will be saved to `<Session ID>-Results.json` file.
+- `steps`: run all local session data through steps/day algorithm, results will be saved to `<Session ID>-Results.csv` file.
+- `uptime`: run all local session data through uptime algorithm, results will be saved to `<Session ID>-Results.csv` file.
 - `report`: report generation workflow, use all locally store results and produces a `.csv` file with all results to current working directory.
 
 ## Preprocessor
@@ -48,7 +48,7 @@ mp run steps --key <KEY>
 Please note that steps/day algorithm will only run for sessions that are saved locally, and have been preprocessed.
 If you are getting errors, please check if you have [downloaded the session data](/docs/object) and [run preprocessor](#preprocessor).
 
-Results will be saved to `<Session ID>-Results.json` file, to get the results, find the file with corresponding session ID,
+Results will be saved to `<Session ID>-Results.csv` file, to get the results, find the file with corresponding session ID,
 or, check [report generation](#report-generation) section.
 
 ## Upright Position Time
@@ -68,7 +68,7 @@ mp run uptime --key <KEY>
 Please note that uptime algorithm will only run for sessions that are saved locally, and have been preprocessed.
 If you are getting errors, please check if you have [downloaded the session data](/docs/object) and [run preprocessor](#preprocessor).
 
-Results will be saved to `<Session ID>-Results.json` file, to get the results, find the file with corresponding session ID,
+Results will be saved to `<Session ID>-Results.csv` file, to get the results, find the file with corresponding session ID,
 or, check [report generation](#report-generation) section.
 
 ## Report Generation
