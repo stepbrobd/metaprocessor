@@ -1,3 +1,4 @@
+import datetime
 import json
 import pathlib
 import re
@@ -219,11 +220,27 @@ def report(tasks: List[pathlib.Path]) -> None:
     columns = list(set(columns))
 
     # id, day_1, day_2, day_3, ..., day_99
-    result_template = pd.DataFrame(columns=["id"] + [f"day_{i}" for i in range(1, 100)])
+    result_template = pd.DataFrame(columns=["id"] + [f"day_{i}" for i in range(1, 25)])
 
     # key is the column name, value is dataframe
     reports = {}
     for column in columns:
         reports[column] = result_template.copy()
 
-    # TODO
+    for result in results:
+        id = result.parent.name
+        rdf = pd.read_csv(result)
+        for rc in rdf.columns:
+            data = {"id": id}
+            for ri, rv in enumerate(rdf[rc]):
+                data[f"day_{ri+1}"] = rv
+            reports[rc] = pd.concat([reports[rc], pd.DataFrame([data])], ignore_index=True)
+
+    for key, value in reports.items():
+        # replace all non-alphanumeric characters with underscore
+        feature = re.sub(r"\W+", "_", key)
+        # filename
+        filename = f"mp-report-{datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S')}-{feature}.csv"
+        # mp-report-yyyy-mm-dd-hh-mm-ss-feature.csv
+        value.to_csv(f"{pathlib.Path.cwd()}/{filename}", index=False)
+        print(f"[green]Generated {filename}[/green]")

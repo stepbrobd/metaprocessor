@@ -73,4 +73,41 @@ or, check [report generation](#report-generation) section.
 
 ## Report Generation
 
-...WIP
+After running object download, preprocessor, steps/day and uptime algorithms, you can generate a report for all sessions or specific session.
+
+To generate report for all sessions, run:
+
+```shell
+mp run report
+```
+
+To generate report for specific session, run:
+
+```shell
+mp run report --key <KEY>
+```
+
+The report generator will go through all locally stored results (`<Session ID>-Results.csv`) and generate a `.csv` file to current working directory, with all saved results.
+
+The format of the report is:
+
+```csv
+id, day_1, day_2, ..., day_n
+<Session ID>, <Feature 1>, <Feature 2>, ..., <Feature n>
+```
+
+For example:
+
+UpTime report may look like `mp-report-yyyy-mm-dd-hh-mm-ss-uptime.csv`:
+
+```csv
+id,day_1,day_2,day_3,day_4,day_5,day_6,day_7,day_8,day_9,day_10,day_11,day_12,day_13,day_14,day_15,day_16,day_17,day_18,day_19,day_20,day_21,day_22,day_23,day_24
+AEO000-BHC0000-0-D00-Visit-0,0.2302858553377207,0.313004209806334,0.320062796838697,0.2184967770350215,0.1407022845496559,0.1267014793200334,0.241944586278251,,,,,,,,,,,,,,,,,
+```
+
+Steps/Day report may look like `mp-report-yyyy-mm-dd-hh-mm-ss-steps_count.csv`:
+
+```csv
+id,day_1,day_2,day_3,day_4,day_5,day_6,day_7,day_8,day_9,day_10,day_11,day_12,day_13,day_14,day_15,day_16,day_17,day_18,day_19,day_20,day_21,day_22,day_23,day_24
+AEO000-BHC0000-0-D00-Visit-0,5224,5053,6678,4988,3211,2340,217,,,,,,,,,,,,,,,,,
+```
