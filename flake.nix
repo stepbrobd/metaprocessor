@@ -1,4 +1,6 @@
 {
+  description = "@stepbrobd: metaprocessor, all-in-one data pipeline for mbientlab metawear series sensors!";
+
   inputs = {
     nixpkgs.url = "flake:nixpkgs/nixpkgs-unstable";
     utils.url = "flake:flake-utils";
