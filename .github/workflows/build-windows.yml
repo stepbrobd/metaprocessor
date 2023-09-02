@@ -1,0 +1,17 @@
+name: Build - Windows
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  Build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Build MetaProcessor
+        run: python3 -m venv .venv && .venv\Scripts\Activate.ps1 && python3 -m pip install .
