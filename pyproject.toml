@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "metaprocessor"
-version = "2023.827.0"
+version = "2023.902.0"
 description = "MetaProcessor, all-in-one data pipeline for MbientLab MetaWear series sensors!"
 readme = "readme.md"
 license = { file = "license.md" }
