@@ -4,6 +4,8 @@
 
 ![Build Status (Linux)](https://github.com/stepbrobd/metaprocessor/actions/workflows/build-linux.yml/badge.svg)
 
+![Build Status (Windows)](https://github.com/stepbrobd/metaprocessor/actions/workflows/build-windows.yml/badge.svg)
+
 ![Release Status](https://github.com/stepbrobd/metaprocessor/actions/workflows/release.yml/badge.svg)
 
 MetaProcessor, all-in-one data pipeline for MbientLab MetaWear series sensors!
